@@ -51,6 +51,7 @@ public class romanNums {
         }
         return result;
     }
+
     private static int value(char romNum) {
         if (romNum == 'I') return 1;
         else if (romNum == 'V')
@@ -63,6 +64,7 @@ public class romanNums {
             return 100;
         return -1;
     }
+
     private static String arabToRoman(int num) {
         String[] c = {"", "C"};
         String[] x = {"", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"};
