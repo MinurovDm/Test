@@ -1,6 +1,9 @@
 package Calculator;
 
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class romanNums {
     private final String num1;
     private final String num2;
@@ -34,35 +37,54 @@ public class romanNums {
                 return "Неизвестный арифметический знак";
         }
     }
+// Стрый вариант
+//    private static int romanToArabic(String romNums) {
+//        int result = 0;
+//        for (int i = 0; i < romNums.length(); i++) {
+//            int num1 = value(romNums.charAt(i));
+//            if (i + 1 < romNums.length()) {
+//                int num2 = value(romNums.charAt(i + 1));
+//                if (num1 >= num2) {
+//                    result += num1;
+//                } else
+//                    result += num2 - num1;
+//            } else {
+//                result += num1;
+//            }
+//        }
+//        return result;
+//    }
+//
+//    private static int value(char romNum) {
+//        if (romNum == 'I') return 1;
+//        else if (romNum == 'V')
+//            return 5;
+//        else if (romNum == 'X')
+//            return 10;
+//        else if (romNum == 'L')
+//            return 50;
+//        else if (romNum == 'C')
+//            return 100;
+//        return -1;
+//    }
+    private static int romanToArabic (String s){
+        Map<Character, Integer> map = new HashMap<>();
+        map.put('I', 1);
+        map.put('V', 5);
+        map.put('X', 10);
+        map.put('L', 50);
+        map.put('C', 100);
 
-    private static int romanToArabic(String romNums) {
         int result = 0;
-        for (int i = 0; i < romNums.length(); i++) {
-            int num1 = value(romNums.charAt(i));
-            if (i + 1 < romNums.length()) {
-                int num2 = value(romNums.charAt(i + 1));
-                if (num1 >= num2) {
-                    result += num1;
-                } else
-                    result += num2 - num1;
+
+        for (int i = 0; i < s.length(); i++){
+            if (i < 0 && map.get(s.charAt(i)) > map.get(s.charAt(i -1))) {
+                result += map.get(s.charAt(i)) - 2 * map.get(s.charAt(i-1));
             } else {
-                result += num1;
+                result += map.get(s.charAt(i));
             }
         }
         return result;
-    }
-
-    private static int value(char romNum) {
-        if (romNum == 'I') return 1;
-        else if (romNum == 'V')
-            return 5;
-        else if (romNum == 'X')
-            return 10;
-        else if (romNum == 'L')
-            return 50;
-        else if (romNum == 'C')
-            return 100;
-        return -1;
     }
 
     private static String arabToRoman(int num) {
